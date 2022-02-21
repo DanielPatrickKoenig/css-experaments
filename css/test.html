@@ -9,5 +9,52 @@
         It can does not need to be running on a server, you can open it locally on a browser to preview your css.
         <br />
         Edit to suit your needs but do not remove the css reference in the head tag (that is the only reason the file exists)
+
+        <div class="bounce-2 infinite">
+            Bouncer
+        </div>
+        <ul class="loader">
+
+        </ul>
+        <ul class="line">
+
+        </ul>
+        <svg class="flame">
+            <g>
+                <path d="M  -8 -122 C -7 -145 2 -149 2 -149 C 2 -149 9 -145 8 -121 C 8 -98 15 -95 15 -71 C 15 -47 25 -43 25 -20 C 25 4 0 0 0 0 C 0 0 -25 3 -25 -20 C -25 -44 -15 -48 -15 -72 C -15 -95 -8 -98 -8 -122 Z">
+
+                </path>
+            </g>
+        </svg>
+        <script>
+            var particlesContainer = document.querySelector('.loader');
+            var particleCount = 10;
+            for(var i = 0; i < particleCount; i++) {
+                var particle = document.createElement('li');
+                particlesContainer.appendChild(particle);
+            }
+
+            var lineContainer = document.querySelector('.line');
+            var lineParticleCount = 100;
+            for(var i = 0; i < lineParticleCount; i++) {
+                var dot = document.createElement('li');
+                lineContainer.appendChild(dot);
+            }
+            /*
+            var jString = '[[{"x":1.9819845442700705,"y":-148.80922470486405},{"x":1.9819845442700705,"y":-148.80922470486405},{"x":1.9819845442700705,"y":-148.80922470486405}],[{"x":7.930909536376646,"y":-97.51741364045803},{"x":8.565144590543067,"y":-145.13636554601453},{"x":8.248027063459855,"y":-121.32688959323629}],[{"x":14.71235000226428,"y":-47.33561278498459},{"x":15.346585056430701,"y":-94.9545646905411},{"x":15.029467529347489,"y":-71.14508873776285}],[{"x":24.680665333232238,"y":4.142420495486732},{"x":25.31490038739866,"y":-43.476531410069775},{"x":24.997782860315446,"y":-19.66705545729152}],[{"x":0,"y":0},{"x":0,"y":0},{"x":0,"y":0}],[{"x":-24.680665333232234,"y":-44.14242049548673},{"x":-25.314900387398655,"y":3.4765314100697715},{"x":-24.997782860315446,"y":-20.332944542708482}],[{"x":-14.650754375947834,"y":-95.35409814179128},{"x":-15.284989430114255,"y":-47.73514623623477},{"x":-14.967871903031046,"y":-71.54462218901303}],[{"x":-7.433436440058819,"y":-145.34945005334797},{"x":-8.06767149422524,"y":-97.73049814779147},{"x":-7.7505539671420305,"y":-121.53997410056972}]]';
+            function renderSVGPath(points){
+                var path = 'M '+' '+Math.round(points[points.length-1][2].x)+' '+Math.round(points[[points.length-1]][2].y)+' ';
+                for(var i = 0; i < points.length; i++){
+                    // path+='C '+flamePoints[i][0].x+' '+flamePoints[i][0].y+' '+flamePoints[i][1].x+' '+flamePoints[i][1].y+' '+flamePoints[i][2].x+' '+flamePoints[i][2].y+' ';
+                    var shift = i === 0 ? points.length - 1 : i - 1;
+                    path+='C '+Math.round(points[shift][0].x)+' '+Math.round(points[shift][0].y)+' '+Math.round(points[i][1].x)+' '+Math.round(points[i][1].y)+' '+Math.round(points[i][2].x)+' '+Math.round(points[i][2].y)+' ';
+                }
+                path+="Z";
+                return path;
+            }
+            
+            console.log(renderSVGPath(JSON.parse(jString)));
+            */
+        </script>
     </body>
 </html>

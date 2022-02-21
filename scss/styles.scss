@@ -2,3 +2,7 @@ $colortest: #cc0000;
 body{
     background-color: $colortest;
 }
+@import './partials/bounce';
+@import './partials/particle';
+@import './partials/flame';
+

@@ -1,0 +1,115 @@
+.loader{
+    position: relative;
+    li {
+        position: absolute;
+        width: 0;
+        height:100px;
+        display: block;
+        left: 80px;
+        &::after{
+            display: block;
+            position: absolute;
+            content: '';
+            width: 20px;
+            height: 20px;
+            bottom: -10px;
+            left: -10px;
+            background-color: #00cc00;
+            border-radius: 20px;
+            transform: scale(0);
+        }
+        @keyframes particle-scaler {
+            0%{
+                transform: scale(0);
+            }
+            50%{
+                transform: scale(1);
+            }
+            100%{
+                transform: scale(0);
+            }
+        }
+        $count: 10;
+        @for $i from 1 through $count{
+            $angle: (360 / $count) * $i;
+            &:nth-child(#{$i}){
+                transform: rotate(#{$angle}deg);
+                &::after{
+                    animation: particle-scaler;
+                    animation-iteration-count: infinite;
+                    animation-duration: 2s;
+                    animation-delay: #{$angle / 200}s;
+                }
+            }
+        }
+    }
+    
+}
+
+.line{
+    position: relative;
+    left: 400px;
+    top: 400px;
+    li{
+        position: absolute;
+        width: 0;
+        height:0;
+        display: block;
+        &::after{
+            display: block;
+            position: absolute;
+            content: '';
+            width: 4px;
+            height: 4px;
+            bottom: -1px;
+            left: -1px;
+            background-color: #0000cc;
+        }
+        
+        $count: 100;
+        @for $i from 1 through $count{
+            @keyframes dot-mover-#{$i} {
+                from{
+                    transform: translateX(#{random(400) - 200}px);
+                    opacity: 0;
+                }
+                to{
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+            }
+            @keyframes dot-mover-#{$i}-after {
+                from{
+                    transform: translateY(#{random(400) - 200}px);
+                }
+                to{
+                    transform: translateY(0);
+                }
+            }
+            &:nth-child(#{$i}){
+                left: #{4 * $i}px;
+                animation: dot-mover-#{$i};
+                animation-duration: 2s;
+                animation-iteration-count: 1;
+                &:nth-child(even){
+                    animation-timing-function: ease-in;
+                }
+                &:nth-child(odd){
+                    animation-timing-function: ease-out;
+                }
+                &::after{
+                    animation: dot-mover-#{$i}-after;
+                    animation-duration: 2s;
+                    animation-iteration-count: 1;
+                }
+                &:nth-child(odd)::after{
+                    animation-timing-function: ease-in;
+                }
+                &:nth-child(even)::after{
+                    animation-timing-function: ease-out;
+                }
+            }
+        }
+    }
+   
+}

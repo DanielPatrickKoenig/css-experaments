@@ -1,0 +1,108 @@
+@mixin bouncer($bounceDuration, $bounceHeight, $jump){
+    $bounceSteps: (
+        1: (time: 0%, value: -1),
+        2: (time: 35.91910843977066%, value: 0),
+        3: (time: 52.69847232657307%, value: -.25),
+        4: (time: 71.67543200601264%, value: 0),
+        5: (time: 80.99799649386667%, value: -.06),
+        6: (time: 90.50212872527189%, value: 0),
+        7: (time: 95.16654144753599%, value: -.02),
+        8: (time: 100%, value: 0)
+    );
+    @keyframes bounce-keyframes {
+        @if $jump{
+            0%{
+                transform: translateY(0);
+            }
+        }
+        @each $step, $value in $bounceSteps {
+            $calculatedValue: map-get($value, 'time');
+            @if $jump{
+                #{($calculatedValue * .75) + 25%}{
+                    transform: translateY($bounceHeight*map-get($value, 'value'));
+                }
+            }
+            @else{
+                #{$calculatedValue}{
+                    transform: translateY($bounceHeight*map-get($value, 'value'));
+                }
+            }
+        }
+    }
+    animation: bounce-keyframes;
+    animation-duration: .5s;
+    animation-timing-function: linear;
+}
+$bounceDuration: 3s;
+$bounceHeight:300%;
+$bounceValues: -1 -.25 -.06 -.02;
+$bounceSteps: (
+    1: (time: 0%, value: -1),
+    2: (time: 35.91910843977066%, value: 0),
+    3: (time: 52.69847232657307%, value: -.25),
+    4: (time: 71.67543200601264%, value: 0),
+    5: (time: 80.99799649386667%, value: -.06),
+    6: (time: 90.50212872527189%, value: 0),
+    7: (time: 95.16654144753599%, value: -.02),
+    8: (time: 100%, value: 0)
+);
+.bounce-2{
+    @include bouncer(3s, 300%, true);
+    animation-iteration-count: infinite;
+
+    // @keyframes bounce-keyframes {
+    //     @each $step, $value in $bounceSteps {
+    //         $calculatedValue: map-get($value, 'time');
+    //         #{$calculatedValue}{
+    //             transform: translateY($bounceHeight*map-get($value, 'value'));
+    //         }
+    //     }
+    // }
+    // animation: bounce-keyframes;
+    // animation-duration: .5s;
+    // animation-timing-function: linear;
+    // &.infinite{
+    //     animation-iteration-count: infinite;
+    // }
+}
+.bounce{
+    @keyframes bounce {
+        0%{
+            transform: translateY(0);
+        }
+        9%{
+            transform: translateY($bounceHeight*nth($bounceValues, 1));
+        }
+        14.737%{
+            transform: translateY(0);
+        }
+        17.413%{
+            transform: translateY($bounceHeight*nth($bounceValues, 2));
+        }
+        20.448%{
+            transform: translateY(0);
+        }
+        21.937%{
+            transform: translateY($bounceHeight*nth($bounceValues, 3));
+        }
+        23.455%{
+            transform: translateY(0);
+        }
+        24.2%{
+            transform: translateY($bounceHeight*nth($bounceValues, 4));
+        }
+        24.972%{
+            transform: translateY(0);
+        }
+        100%{
+            transform: translateY(0);
+        }
+    }
+    animation: bounce;
+    animation-duration: $bounceDuration;
+    animation-timing-function: linear;
+    &.infinite{
+        animation-iteration-count: infinite;
+    }
+
+}
